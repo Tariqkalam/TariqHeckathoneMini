@@ -1,0 +1,94 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Ecommerce Website</title>
+    <link rel="stylesheet" href="style.css">
+
+    
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#orders">Orders</a></li>
+                <li><a href="#cart">Cart</a></li>
+                <li><a href="#wishlist">Wishlist</a></li>
+                <li><a href="signup.html">Users</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Welcome to our Ecommerce Website!</h1>
+        <section id="products">
+            <h2>Products</h2>
+            <ul id="products-list">
+                <li>Shirts</li>
+                <li>Trousers</li>
+                <li>Shoes</li>
+                <!-- products will be listed here -->
+            </ul>
+            <button id="view-more">View More Products</button>
+        </section>
+        <section id="orders">
+            <h2>Orders</h2>
+            <table id="orders-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="orders-list">
+                    <!-- orders will be listed here -->
+                </tbody>
+            </table>
+            <button id="view-more-orders">View More Orders</button>
+        </section>
+        <section id="cart">
+            <h2>Cart (0 items)</h2>
+            <table id="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Subtotal</th>
+                    </tr>
+            
+             </thead >
+               <tbody id="cart-list">
+                  <!-- cart items will be listed here -->
+              </tbody >
+           </table >
+           <button id="checkout">Checkout</button >
+       </section >
+       <section id="wishlist">
+       <h2>Wishlist (0 items)</h2 >
+       <ul id="wishlist-list">
+       <!-- wishlist items will be listed here -->
+       </ul >
+       <button id="remove-from-wishlist">Remove from Wishlist</button >
+   </section >
+   <section id="deals">
+   <h2>Deals of the Day!</h2 >
+   <ul id="deals-list">
+   <!-- deals will be listed here -->
+   </ul >
+   </section >
+   <section id="reviews">
+   <h2>Reviews</h2 >
+   <ul id="reviews-list">
+   <!-- reviews will be listed here -->
+   </ul >
+   </section >
+  </main>
+
+  <script src="main.js></script>
+
+  </body>
+
+  </html>
