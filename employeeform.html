@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>employee Form</title>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  
+</head>
+
+<body>
+
+    <label>First Name</label>
+    <input type="text" id="FnameInp">
+    <br><br>
+ 
+    <label>Last Name</label>
+    <input type="text" id="LnameInp">
+    <br><br>    
+    
+<label>Department</label>
+<select id="DeptInp">
+<OPtion value="Deveploment">Development</OPtion>
+<OPtion value="Testing">Testing</OPtion>
+<OPtion value="Management">Management</OPtion>
+<OPtion value="Administration">Administration</OPtion>
+   </select>
+   <br><br>
+
+   <label>Can Swim</label>
+   <select id="SwimInp">
+<option value="yes">Yes</option>
+<option value="no">No</option>
+</select>
+<br><br>
+
+<label>CNIC</label>
+<input type="number" id="CnicInp">
+<br><br>
+
+<button id="AddBtn">Add</button>
+<button id="AddBtn">Retrieve</button>
+<button id="AddBtn">Update</button>
+<button id="AddBtn">Delete</button>
+
+
+<!-- <script type="module" src="employeeform.js"></script> -->
+
+<script type="module">
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import {getDatabase, ref, child, get, set, update, remove} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBCrREDaGV5f92sjvTLFe2b18SD6n7j9uA",
+  authDomain: "heckathonemini.firebaseapp.com",
+  projectId: "heckathonemini",
+  storageBucket: "heckathonemini.appspot.com",
+  messagingSenderId: "1025599380840",
+  appId: "1:1025599380840:web:7cbb284f97dea439d6cadd"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+const db = getDatabase();
+
+let FnameInp = document.getElementById("FnameInp");
+let LnameInp = document.getElementById("LnameInp");
+let DeptInp = document.getElementById("DeptInp");
+let SwimInp = document.getElementById("SwimInp");
+let CnicInp = document.getElementById("CnicInp");
+
+let AddBtn = document.getElementById("AddBtn");
+let RetBtn = document.getElementById("RetBtn");
+let UpdBtn = document.getElementById("UpdBtn");
+let DelBtn = document.getElementById("DelBtn");
+
+function AddData(){
+    set(ref(db, 'EmployeeSet/' + CnicInp.value), {
+        nameofemployee: {
+            firstname: FnameInp.value, 
+            lastname: LnameInp.value 
+        },
+        department: DeptInp.value,
+        canswim: (SwimInp.value == "yes"),
+        cnic: Number(CnicInp.value)
+    }).then(()=>{
+        alert("Data Added Successfully");
+    }).catch((error)=>{
+        alert("Unsuccessfully");
+        console.log(error);
+        })
+    }
+function RetData(){
+const dbRef = ref(db);
+
+get(child(dbRef, 'EmployeeSet/' + CnicInp.value))
+            .then((snapshot)=>{
+                if(snapshot.exists()){
+                    FnameInp.value = snapshot.value().nameofemployee.firstname;
+                    LnameInp.value = snapshot.value().nameofemployee.lastname;
+                    DeptInp.value = snapshot.value().department;
+                    SwimInp.value = (snapshot.value().canswim)? "Yes" : "No";
+                }
+                else{
+                    alert("Employee does not exist");
+                }
+                })
+                .catch((error)=>{
+                    alert("unsuccessful");
+                    console.log(error);
+                })    
+            }
+
+            function UpdateData(){
+                update(ref(db, 'EmployeeSet/' + CnicInp.value), {
+                    nameofemployee: {
+                        firstname: FnameInp.value, 
+                        lastname: LnameInp.value 
+                    },
+                    department: DeptInp.value,
+                    canswim: (SwimInp.value == "yes"),
+                    
+                }).then(()=>{
+                    alert("Data updated Successfully");
+                }).catch((error)=>{
+                    alert("Unsuccessfully");
+                    console.log(error);
+                    })
+                }
+
+                function DeleteData(){
+                    remove(ref(db, 'EmployeeSet/' + CnicInp.value))
+                    .then(()=>{
+                        alert("Data Deleted Successfully");
+                    }).catch((error)=>{
+                        alert("Unsuccessfully");
+                        console.log(error);
+                        })
+                    }
+        
+                    AddBtn.addEventListener('click', AddData);
+                    RetBtn.addEventListener('click', RetData);
+                    UpdBtn.addEventListener('click', UpdateData);
+                    DelBtn.addEventListener('click', DeleteData);
+
+</script>
+</body>
+</html>
